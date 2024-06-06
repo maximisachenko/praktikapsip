@@ -1,0 +1,292 @@
+Slider:
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        pagination: {
+            el: ".swiper-pagination",
+        },
+    });
+</script>
+<script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+HTML: 
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="review_card">
+                    <img src="./images/Line2.png" class="line_image" alt="Line Image">
+                    <img src="./images/user.jpg" alt="" class="review_img" />
+                    <div class="review_rating">
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                    </div>
+                    <p class="review_p">
+                        Simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum simply dummy text of the printing and typesetting
+                        industry. Lorem Ipsum has been.
+                    </p>
+                    <h5 class="review_user">Sara Taylor</h5>
+                    <p class="review_designation">Consumer</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="review_card">
+                    <img src="./images/user.jpg" alt="" class="review_img" />
+                    <img src="./images/Line2.png" class="line_image" alt="Line Image">
+                    <div class="review_rating">
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                    </div>
+                    <p class="review_p">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Eveniet quidem veritatis quod repellendus assumenda ducimus
+                        sint exercitationem consequuntur, quis tempore mollitia
+                        deleniti natus numquam placeat.
+                    </p>
+                    <h5 class="review_user">Marina B</h5>
+                    <p class="review_designation">Consumer</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="review_card">
+                    <img src="./images/user.jpg" alt="" class="review_img" />
+                    <img src="./images/Line2.png" class="line_image" alt="Line Image">
+                    <div class="review_rating">
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                        <img src="./images/icon/star.png" alt="" class="star" />
+                    </div>
+                    <p class="review_p">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Eveniet quidem veritatis quod repellendus assumenda ducimus
+                        sint exercitationem consequuntur, quis tempore mollitia
+                        deleniti natus numquam placeat.
+                    </p>
+                    <h5 class="review_user">Marina B</h5>
+                    <p class="review_designation">Consumer</p>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
+CSS: 
+
+.swiper-pagination {
+    margin-bottom: 5rem;
+}
+
+Выпадающее меню:
+HTML:
+<li class="nav_item dropdown">
+    <a href="$" class="nav_link">
+        Pages
+        <img src="./images/IconVniz.png" alt="Иконка вниз" class="icon_top">
+    </a>
+    <ul class="dropdown_menu">
+        <li class="dropdown_item"><a href="#" class="dropdown_link">Fruits</a></li>
+        <li class="dropdown_item"><a href="#" class="dropdown_link">Vegetables</a></li>
+        <li class="dropdown_item"><a href="#" class="dropdown_link">Other</a></li>
+    </ul>
+</li>
+CSS:
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--color-white);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    opacity: 0; /* Добавляем начальное значение для прозрачности */
+    transition: opacity 0.2s ease-in-out; /* Добавляем анимацию для изменения прозрачности */
+}
+
+.nav_item.dropdown:hover .dropdown_menu {
+    display: block;
+}
+
+SCRIPT:
+<script src="hamburger.js"></script>
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdown = document.querySelector('.nav_item.dropdown');
+    const dropdownMenu = document.querySelector('.dropdown_menu');
+    let isHoveringDropdown = false;
+    let isHoveringDropdownMenu = false;
+    let timeoutId;
+
+    function showDropdownMenu() {
+        clearTimeout(timeoutId); // Очистить предыдущий таймаут, чтобы избежать мигания
+        dropdownMenu.style.opacity = '0';
+        dropdownMenu.style.display = 'block';
+        setTimeout(() => {
+            dropdownMenu.style.opacity = '1';
+        }, 10);
+    }
+
+    function hideDropdownMenu() {
+        timeoutId = setTimeout(function () {
+            if (!isHoveringDropdown && !isHoveringDropdownMenu) {
+                dropdownMenu.style.opacity = '0';
+                // Задержка перед скрытием, чтобы анимация имела время завершиться
+                setTimeout(function () {
+                    dropdownMenu.style.display = 'none';
+                }, 200);
+            }
+        }, 200);
+    }
+
+    dropdown.addEventListener('mouseenter', function () {
+        isHoveringDropdown = true;
+        clearTimeout(timeoutId); // Очистить предыдущий таймаут, чтобы избежать мигания
+        showDropdownMenu();
+    });
+
+    dropdown.addEventListener('mouseleave', function () {
+        isHoveringDropdown = false;
+        hideDropdownMenu();
+    });
+
+    dropdownMenu.addEventListener('mouseenter', function () {
+        isHoveringDropdownMenu = true;
+        clearTimeout(timeoutId); // Очистить предыдущий таймаут, чтобы избежать мигания
+    });
+
+    dropdownMenu.addEventListener('mouseleave', function () {
+        isHoveringDropdownMenu = false;
+        hideDropdownMenu();
+    });
+
+    // Закрыть меню при клике вне его области
+    document.addEventListener('click', function (event) {
+        if (!dropdown.contains(event.target)) {
+            dropdownMenu.style.opacity = '0';
+            setTimeout(function () {
+                dropdownMenu.style.display = 'none';
+            }, 200);
+            isHoveringDropdown = false;
+            isHoveringDropdownMenu = false;
+        }
+    });
+});
+
+Остальные скрипты внедрены просто в HTML:
+
+Подсказка на кнопку:
+
+<script>
+    $(function () {
+        $(".header_btn").tooltip();
+    });
+</script>
+
+Скролл вверх при перематывании страницы вниз:
+<script>
+    $(document).ready(function () {
+        // Показываем кнопку при прокрутке вниз
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#scrollTopBtn').fadeIn();
+            } else {
+                $('#scrollTopBtn').fadeOut();
+            }
+        });
+
+        // Скролл вверх при клике на кнопку
+        $('#scrollTopBtn').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800); // 800 - время анимации в миллисекундах
+            return false;
+        });
+    });
+</script>
+
+Анимация увелечения кнопки при её наведении:
+
+<script>
+    $(document).ready(function () {
+        $('.header_btn').hover(
+            function () {
+                $(this).css('transform', 'scale(1.1)'); // Увеличение кнопки при наведении
+                $('.btn_icon', this).css('transform', 'translateX(10px)'); // Сдвиг иконки вправо
+            },
+            function () {
+                $(this).css('transform', 'scale(1)'); // Возвращение кнопки к исходному размеру
+                $('.btn_icon', this).css('transform', 'translateX(0)'); // Возвращение иконки на место
+            }
+        );
+    });
+</script>
+
+Валидация почты:
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.getElementById('subscribeForm');
+        var emailInput = document.getElementById('emailInput');
+        var errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', function (event) {
+            var emailValue = emailInput.value;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(emailValue)) {
+                event.preventDefault();
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+Открытие фотографий:
+document.addEventListener('DOMContentLoaded', function () {
+    // Функция для показа модального окна с увеличенным изображением
+    function showModal(imageSrc) {
+        var modal = document.createElement('div');
+        modal.classList.add('modal');
+        
+        var modalContent = document.createElement('img');
+        modalContent.classList.add('modal_content');
+        modalContent.src = imageSrc;
+        
+        var closeButton = document.createElement('span');
+        closeButton.classList.add('close');
+        closeButton.innerHTML = '&times;';
+        
+        closeButton.addEventListener('click', function () {
+            modal.style.display = 'none';
+            modal.remove();
+        });
+        
+        modal.appendChild(closeButton);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+        
+        modal.style.display = 'block';
+    }
+    
+    // Находим все изображения продуктов
+    var productImages = document.querySelectorAll('.product_img');
+    
+    // Добавляем обработчик клика для каждого изображения
+    productImages.forEach(function (img) {
+        img.addEventListener('click', function () {
+            showModal(img.src);
+        });
+    });
+});
+
